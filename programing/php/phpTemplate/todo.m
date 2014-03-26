@@ -1,5 +1,5 @@
 
-task0: (data) => <?php echo $data;?>
+task0: {data} => <?php echo $data;?>
 
 task1: (if a > b)
 (a)
