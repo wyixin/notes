@@ -8,7 +8,8 @@ class Template {
         'compile_dir' => 'cache/',
         'cache_html' => FALSE,
         'suffix_cache' => '.html',
-        'cache_time' => 7200
+        'cache_time' => 7200,
+        'debug' => FALSE
     );
 
     private $value = array();
@@ -80,7 +81,7 @@ class Template {
 
         $compile_file = $this->_get_compile_file_name();
         // if compile_file not exist or neet to refresh cache
-        if(!is_file($compile_file)) {
+        if(!is_file($compile_file) || $this->config['debug']) {
             $this->compile_tool->run($tpl_file, $compile_file);
         }
         readfile($compile_file);
