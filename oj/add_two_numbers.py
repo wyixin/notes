@@ -42,7 +42,7 @@ L2 = ListNode(5, ListNode(6, ListNode(4, ListNode(5))))
 L1 = ListNode(3, ListNode(7))
 L2 = ListNode(9, ListNode(2))
 class Solution:
-# @return a ListNode
+    # @return a ListNode
     def addTwoNumbers(self, l1, l2, addition = 0):
         if l1 != None and l2 != None:
             return ListNode((l1.val + l2.val + addition) % 10, self.addTwoNumbers(l1.next, l2.next, (l1.val + l2.val + addition) / 10))
