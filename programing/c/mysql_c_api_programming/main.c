@@ -34,7 +34,9 @@ void help(){
     printf("This is help");
 }
 
-
+void one_line_help(){
+    printf("Usage: ./maim -i|-d|-l|-u|-s|-h + [params]\n");
+}
 //char *create_query = "CREATE DATABASE test";
 //excute_query(con, create_query);
 
@@ -91,6 +93,8 @@ int main(int argc, char **argv)
         update();
     } else if(!strcmp(opt, "-s")){
         sort();
+    } else {
+        one_line_help();
     }
 
     mysql_close(con);
