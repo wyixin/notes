@@ -40,8 +40,11 @@ void one_line_help(){
 //char *create_query = "CREATE DATABASE test";
 //excute_query(con, create_query);
 
-void insert(){
-    printf("This is insert");
+void insert(MYSQL *con, char *name, char *gender, char *b_day, char *w_day, char *xl, char *zw, char *addr, char *phone){
+    char sql[200];
+    sprintf(sql, "insert into users (name, gender, birth_day, work_day, xl, zw, addr, phone) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", name, gender, b_day, w_day, xl, zw, addr, phone); 
+    printf(sql);
+    excute_query(con, sql);
 }
 
 void delete(){
@@ -70,6 +73,8 @@ int main(int argc, char **argv)
         exit(1);
     }
 
+    mysql_options(con, MYSQL_SET_CHARSET_NAME, "utf8");
+
     if (mysql_real_connect(con, DB_HOST, DB_USER, DB_PASS,
             DB_NAME, 0, NULL, 0) == NULL) {
         finish_with_error(con);
@@ -84,7 +89,8 @@ int main(int argc, char **argv)
     if(!strcmp(opt, "-h")){
         help();
     } else if(!strcmp(opt, "-i")){
-        insert();
+        // insert(con, "wyx", "n", "201111", "201111", "hg", "xs", "beiqu", "1342982");
+        insert(con, argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], argv[8], argv[9]);
     } else if(!strcmp(opt, "-d")){
         delete();
     } else if(!strcmp(opt, "-l")){
