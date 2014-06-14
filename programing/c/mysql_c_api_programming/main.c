@@ -6,8 +6,6 @@
    |      sudo apt-get install libmysqlclient-dev mysql-server            |
    |      gcc main.c -o main  `mysql_config --cflags --libs`              |
    +----------------------------------------------------------------------+
-   | 使用方式:                                                            |
-   +----------------------------------------------------------------------+
    | Authors:                                                             |
    +----------------------------------------------------------------------+
 */
@@ -31,7 +29,14 @@ void excute_query(MYSQL *con, char *query){
 }
 
 void help(){
-    printf("This is help");
+    printf("员工管理系统使用指南\n\n");
+    printf("用法：./main [OPTION]... [PARAMS]...\n");
+    printf("-i insert    插入数据     -i 姓名 性别 出生年月 工作年月 学历 职务 住址 电话\n");
+    printf("-d delete    删除数据     -d 员工编号\n");
+    printf("-l list      列出数据     -l \n");
+    printf("-u updata    更新数据     -u 需要更新员工的编号 待更新字段名字 更新数据 \n");
+    printf("-s sort      排序输出     -s 排序字段名 排序方向\n");
+    printf("-h help      帮助文档     -h\n");
 }
 
 void one_line_help(){
