@@ -50,8 +50,8 @@ void delete(MYSQL *con, char *id){
     excute_query(con, sql);    
 }
 
-void list(MYSQL *con){
-    char *sql = "select * from users order by name";
+void _list(MYSQL *con, char *sql){
+
     excute_query(con, sql);
 
     MYSQL_RES *result = mysql_store_result(con);
@@ -82,14 +82,41 @@ void list(MYSQL *con){
     mysql_free_result(result);
 }
 
+void list(MYSQL *con){
+    char *sql = "select * from users order by name";
+    _list(con, sql);
+}
+
 void update(MYSQL *con, char *id, char *field, char *value){
     char sql[40];
     sprintf(sql, "update users set %s = '%s' where id = %s", field, value, id);
     excute_query(con, sql);    
 }
 
-void sort(){
-    printf("This is sort");
+void sort(MYSQL *con, char *field, char *direct){
+    int i = 0;
+
+    char sql[40];
+    char *fields[] = {
+        "name", "id"
+    };
+    int num_fields = 2;
+
+    if(!direct || strcmp(direct, "desc"))
+        direct = "asc";
+
+    for( ; i < num_fields; i++){
+        if(field && !strcmp(field, fields[i])){
+            // found
+            goto found;
+        }
+    }
+
+    field = "id";
+
+ found:
+    sprintf(sql, "select * from users order by %s %s", field, direct);
+    _list(con, sql);
 }
 
 int main(int argc, char **argv)
@@ -126,9 +153,8 @@ int main(int argc, char **argv)
     } else if(!strcmp(opt, "-u")){
         update(con, argv[2], argv[3], argv[4]);
     } else if(!strcmp(opt, "-s")){
-        //TODO sort();
-        list(con);
-    } else {
+        sort(con, argv[2], argv[3]);
+     } else {
         one_line_help();
     }
 
