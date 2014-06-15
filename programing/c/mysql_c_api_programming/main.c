@@ -52,6 +52,7 @@ void insert(MYSQL *con, char *name, char *gender, char *b_day, char *w_day, char
 void delete(MYSQL *con, char *id){
     char sql[20];
     sprintf(sql, "delete from users where id = %s", id);
+    printf("%s", sql);
     excute_query(con, sql);    
 }
 
@@ -69,20 +70,16 @@ void _list(MYSQL *con, char *sql){
 
     MYSQL_ROW row;
     MYSQL_FIELD *field;
-    int i = 0;
-    
+
+    printf("%s %s   %s %s %s  %s  %s  %s  %s\n", "编号", "姓名", "性别", "出生年月", "工作年月", "学历", "职务", "住址", "电话");
+
     while ((row = mysql_fetch_row(result))){
+        int i = 0;
         for(i; i < num_fields; i++){
-            if (i == 0){
-                printf("%s %s   %s %s %s  %s  %s  %s  %s", "编号", "姓名", "性别", "出生年月", "工作年月", "学历", "职务", "住址", "电话");
-                printf("\n");
-            }
-            
             printf("%s  ", row[i] ? row[i] : "NULL");
         }
+        printf("\n"); 
     }
-
-    printf("\n");
 
     mysql_free_result(result);
 }
