@@ -44,8 +44,8 @@ void one_line_help(){
 }
 
 void insert(MYSQL *con, char *name, char *gender, char *b_day, char *w_day, char *xl, char *zw, char *addr, char *phone){
-    char sql[200];
-    sprintf(sql, "insert into users (name, gender, birth_day, work_day, xl, zw, addr, phone) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", name, gender, b_day, w_day, xl, zw, addr, phone); 
+    char sql[256];
+    snprintf(sql, sizeof(sql), "insert into users (name, gender, birth_day, work_day, xl, zw, addr, phone) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", name, gender, b_day, w_day, xl, zw, addr, phone);
     excute_query(con, sql);
 }
 
@@ -74,7 +74,7 @@ void _list(MYSQL *con, char *sql){
 
     while ((row = mysql_fetch_row(result))){
         int i = 0;
-        for(i; i < num_fields; i++){
+        for( ; i < num_fields; i++){
             printf("%s  ", row[i] ? row[i] : "NULL");
         }
         printf("\n"); 
@@ -89,15 +89,15 @@ void list(MYSQL *con){
 }
 
 void update(MYSQL *con, char *id, char *field, char *value){
-    char sql[60];
-    sprintf(sql, "update users set %s = '%s' where id = %s", field, value, id);
+    char sql[68];
+    snprintf(sql, sizeof(sql), "update users set %s = '%s' where id = %s", field, value, id);
     excute_query(con, sql);    
 }
 
 void sort(MYSQL *con, char *field, char *direct){
     int i = 0;
 
-    char sql[40];
+    char sql[48];
     char *fields[] = {
         "name", "id"
     };
@@ -116,7 +116,7 @@ void sort(MYSQL *con, char *field, char *direct){
     field = "id";
 
  found:
-    sprintf(sql, "select * from users order by %s %s", field, direct);
+    snprintf(sql, sizeof(sql), "select * from users order by %s %s", field, direct);
     _list(con, sql);
 }
 
