@@ -50,9 +50,8 @@ void insert(MYSQL *con, char *name, char *gender, char *b_day, char *w_day, char
 }
 
 void delete(MYSQL *con, char *id){
-    char sql[20];
-    sprintf(sql, "delete from users where id = %s", id);
-    printf("%s", sql);
+    char sql[48];
+    snprintf(sql, 48, "delete from users where id = %s", id);    
     excute_query(con, sql);    
 }
 
@@ -90,7 +89,7 @@ void list(MYSQL *con){
 }
 
 void update(MYSQL *con, char *id, char *field, char *value){
-    char sql[40];
+    char sql[60];
     sprintf(sql, "update users set %s = '%s' where id = %s", field, value, id);
     excute_query(con, sql);    
 }
