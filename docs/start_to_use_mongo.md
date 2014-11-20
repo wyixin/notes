@@ -8,7 +8,8 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
 
-If db cant start currectly, and log says `Please make at least 3379MB available in /var/lib/mongodb/journal or use --smallfiles`
+If db cant start currectly, and log says
+`Please make at least 3379MB available in /var/lib/mongodb/journal or use --smallfiles`
 set `smallfiles=true` in conf file
 
 ## Base Info
@@ -19,13 +20,13 @@ set `smallfiles=true` in conf file
 ## Usage
 #### manage cmd
 * show dbs
-  admin  (empty)
-  local  0.031GB
-  sales  0.031GB
-  test   0.031GB
+    admin  (empty)
+    local  0.031GB
+    sales  0.031GB
+    test   0.031GB
 
 * db
-  sales
+    sales
 
 * show collections
     system.indexes
@@ -35,31 +36,31 @@ set `smallfiles=true` in conf file
 ### [curd](http://docs.mongodb.org/manual/core/crud-introduction/)
 
 - select
-* db.users.find()
-  { "_id" : ObjectId("546c2bf4d9a4d37973ac3c38"), "name" : "wyx", "age" : 22 }
-  { "_id" : ObjectId("546ca3b669ce8b0d372ff910"), "email" : "ttt", "password" : "9990775155c3518a0d7917f7780b24aa" }
-  { "_id" : ObjectId("546ca40875417d1a374bb98b"), "email" : "sss", "password" : "9f6e6800cfae7749eb6c486619254b9c" }
+  * db.users.find()
+    { "_id" : ObjectId("546c2bf4d9a4d37973ac3c38"), "name" : "wyx", "age" : 22 }
+    { "_id" : ObjectId("546ca3b669ce8b0d372ff910"), "email" : "ttt", "password" : "9990775155c3518a0d7917f7780b24aa" }
+    { "_id" : ObjectId("546ca40875417d1a374bb98b"), "email" : "sss", "password" : "9f6e6800cfae7749eb6c486619254b9c" }
 
-* db.users.find().limit(1)
-  { "_id" : ObjectId("546c2bf4d9a4d37973ac3c38"), "name" : "wyx", "age" : 22 }
+  * db.users.find().limit(1)
+    { "_id" : ObjectId("546c2bf4d9a4d37973ac3c38"), "name" : "wyx", "age" : 22 }
 
-* db.testData.find( { email : 'sss' } )
-  { "_id" : ObjectId("546ca40875417d1a374bb98b"), "email" : "sss", "password" : "9f6e6800cfae7749eb6c486619254b9c" }
+  * db.testData.find( { email : 'sss' } )
+    { "_id" : ObjectId("546ca40875417d1a374bb98b"), "email" : "sss", "password" : "9f6e6800cfae7749eb6c486619254b9c" }
 
-* db.users.find({name: 'wyx'}, {_id: 0})
-  { "name" : "wyx", "age" : 22 }
+  * db.users.find({name: 'wyx'}, {_id: 0})
+    { "name" : "wyx", "age" : 22 }
 
 - insert
-* db.users.insert({name: 'test', age: 18})
+  * db.users.insert({name: 'test', age: 18})
 
 - [update](http://docs.mongodb.org/manual/tutorial/modify-documents/)
 
 - delete
-* db.users.remove({}) // remove all documents from a collection
-* db.users.drop() // drop all collection
+  * db.users.remove({}) // remove all documents from a collection
+  * db.users.drop() // drop all collection
 
-* db.users.remove( { name : "wyx" } ) // remove document where the name field equals wyx
-* db.users.remove( { name : "wyx" }, 1 ) // remove a single document
+  * db.users.remove( { name : "wyx" } ) // remove document where the name field equals wyx
+  * db.users.remove( { name : "wyx" }, 1 ) // remove a single document
 
 
 ## TODO:
