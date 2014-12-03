@@ -30,4 +30,11 @@ i3 默认修饰符是 Alt, 配置文件中可以选择使用 Alt(Mod1) 或者 Wi
 ### 启动应用程序
   $mod + d 打开 dmenu, 输入应用名称
   $mod + Shift + Q 关闭窗口
+  
+### 重启 & 退出
+    Mod Shift r        重启i3
+    Mod Shift e        退出i3
 
+参考：
+[Linux 桌面平铺管理器 - i3wm](http://www.jianshu.com/p/JBGSWF)
+[deepin i3](http://wiki.linuxdeepin.com/index.php?title=I3)
